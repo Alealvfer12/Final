@@ -19,7 +19,7 @@ let insertar_moto = async (moto) => {
   let sql = `INSERT INTO public.motos(
         placa, estado, clase, marca, modelo, color, cilindraje, id_propietario, nro_soat, vencimiento_soat, nro_tecnomecanica, 
         vencimiento_tecnomecanica)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $18, $9, $10, $11, $12)`;
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`;
   let values = [
     moto.placa,
     moto.estado,
@@ -32,7 +32,7 @@ let insertar_moto = async (moto) => {
     moto.nro_soat,
     moto.vencimiento_soat,
     moto.nro_tecnomec,
-    moto.vencimiento_tecnomec,
+    moto.vencimiento_tecnomec
   ];
   let respuesta = await _service.runsql(sql, values);
   return respuesta;
@@ -82,7 +82,7 @@ let actualizar_moto = async (moto, placa) => {
     moto.vencimiento_soat,
     moto.nro_tecnomec,
     moto.vencimiento_tecnomec,
-    placa,
+    placa
   ];
 
 

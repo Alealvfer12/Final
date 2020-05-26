@@ -76,7 +76,7 @@ router.post("/verificar", (req, res) => {
         let persona =
           respuestaDB.rowCount > 0 ? respuestaDB.rows[0] : undefined;
         if (persona) {
-          let token = _controlador.generar_token(persona);
+          let token = _controlador.generarToken(persona);
           res.status(200).send({
             ok: true,
             info: token,

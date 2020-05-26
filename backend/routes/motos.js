@@ -49,7 +49,7 @@ router.post("/motos", (req, res) => {
       .then((answerDB) => {
         res.send({
           ok: true,
-          mensaje: "Usuario guardado",
+          mensaje: "Moto guardada",
           info: info_moto,
         });
       })

@@ -2,7 +2,7 @@
   "name": "final",
   "version": "1.0.0",
   "description": "Proyecto Final ",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/Alealvfer12/Final/issues"
   },
-  "homepage": "https://github.com/Alealvfer12/Final#readme"
+  "homepage": "https://github.com/Alealvfer12/Final#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.2.1"
+  }
 }

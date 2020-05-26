@@ -32,7 +32,7 @@ let guardar_usuario = async (usuario) => {
     usuario.celular,
     usuario.correo,
     usuario.rol,
-    usuario.clave,
+    usuario.clave
   ];
   let respuesta = _service.runsql(sql, values);
   return respuesta;
@@ -71,7 +71,7 @@ let actualizar_usuario = async (usuario, cedula) => {
     usuario.correo,
     usuario.rol,
     usuario.clave,
-    cedula,
+    cedula
   ];
   let respuesta = await _service.runsql(sql,values);
   return respuesta;
