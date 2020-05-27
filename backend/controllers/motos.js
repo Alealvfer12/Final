@@ -31,8 +31,8 @@ let insertar_moto = async (moto) => {
     moto.id_propietario,
     moto.nro_soat,
     moto.vencimiento_soat,
-    moto.nro_tecnomec,
-    moto.vencimiento_tecnomec
+    moto.nro_tecno,
+    moto.vencimiento_tecno
   ];
   let respuesta = await _service.runsql(sql, values);
   return respuesta;
@@ -80,8 +80,8 @@ let actualizar_moto = async (moto, placa) => {
     moto.id_propietario,
     moto.nro_soat,
     moto.vencimiento_soat,
-    moto.nro_tecnomec,
-    moto.vencimiento_tecnomec,
+    moto.nro_tecno,
+    moto.vencimiento_tecno,
     placa
   ];
 

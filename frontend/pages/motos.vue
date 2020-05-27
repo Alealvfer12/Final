@@ -9,14 +9,13 @@
           <b-card title="Crear motos">
             <b-card-text>A continuación inserte los datos de su moto :</b-card-text>
 
-            <b-form action="javascript:void(0)" @submit="crearUsuario()">
+            <b-form action="javascript:void(0)" @submit="crearMotos()">
               <br />
 
   
               <b-form-group label="Placa" label-for="placa">
                 <b-form-input
                   class="form-control"
-                  type="number"
                   required
                   v-model="motos.placa"
                   :disabled="enEdicion"
@@ -110,19 +109,20 @@
                   placeholder="Ingrese numero del soat"
                   id="nro_soat"/>
                 <b-form-invalid-feedback :state="validacionNro_soat">Campo obligatorio</b-form-invalid-feedback>
+             
               </b-form-group>
                <b-form-group label="Vencimiento soat" label-for="vencimiento_soat">
                 <b-form-input
-                  class="form-control"
-                  type="date"
+                  class="form-control"          
                   required
-                  v-model="motos.Vencimiento_soat"
+                  v-model="motos.vencimiento_soat"
                   :disabled="enEdicion"
-                  placeholder="Ingrese vencimiento del soat"
+                  placeholder="dd-mm-aaaa"
                   id="vencimiento_soat"/>
                 <b-form-invalid-feedback :state="validacionVencimiento_soat">Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>
-               <b-form-group label="Numero tecnomecánica" label-for="nro_tecno">
+
+            <b-form-group label="Numero tecnomecánica" label-for="nro_tecno">
                 <b-form-input
                   class="form-control"
                   type="number"
@@ -133,21 +133,21 @@
                   id="nro_tecno"/>
                 <b-form-invalid-feedback :state="validacionNro_tecno">Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>
+
               <b-form-group label="Vencimiento tecnomecánica" label-for="vencimiento_tecno">
                 <b-form-input
-                  class="form-control"
-                  type="date"
+                  class="form-control"            
                   required
-                  v-model="motos.Vencimiento_tecno"
+                  v-model="motos.vencimiento_tecno"
                   :disabled="enEdicion"
-                  placeholder="Ingrese vencimiento de la tecnomecánica"
+                  placeholder="dd-mm-aaaa"
                   id="vencimiento_tecno"/>
                 <b-form-invalid-feedback :state="validacionVencimiento_tecno">Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>
             
 
               <b-button type="submit" variant="danger" v-if="!enEdicion">Crear usuario</b-button>
-              <b-button @click="actualizar_usuario()" variant="primary" v-else>Actualizar usuario</b-button>
+              <b-button @click="actualizarMotos()" variant="primary" v-else>Actualizar usuario</b-button>
             </b-form>
           </b-card>
         </b-col>
@@ -157,21 +157,19 @@
             striped
             responsive
             hover
-            :items="lista_usuario"
+            :items="lista_motos"
             v-show="showTable"
-            class="border border-danger text-center">
+            class="border border-warning text-center">
             <template v-slot:cell(acciones)="row">
-              <b-button size="sm" @click="cargarUsuario(row)" class="mr-2" variant="outline-primary">
-                <b-img left  width="15" height="15"></b-img>Modificar
+              <b-button size="sm" @click="cargarMoto(row)" class="mr-2" variant="outline-primary"> Modificar
               </b-button>
               <br />
               <br />
               <b-button
                 size="sm"
-                @click="eliminar_usuario(row)"
+                @click="eliminarMotos(row)"
                 class="mr-2"
-                variant="outline-danger">
-                <b-img left width="15" height="15"></b-img>Eliminar
+                variant="outline-danger"> Eliminar
               </b-button>
             </template>
           </b-table>
@@ -183,3 +181,26 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../assets/motos.js"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
