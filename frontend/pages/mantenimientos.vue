@@ -12,16 +12,15 @@
             <b-form action="javascript:void(0)" @submit="crearMantenimientos()">
               <br />
 
-              <b-form-group label="Mecanico" label-for="documento">
+              <b-form-group label="Mecanico" label-for="id_mecanico">
                 <b-form-select
                   v-model="mantenimiento.id_mecanico"
                   :options="lista_empleados"
                   required
-                  id="documento"
+                  id="id_mecanico"
                 ></b-form-select>
                 <b-form-invalid-feedback :state="validacionId_mecanico"
-                  >Campo obligatorio</b-form-invalid-feedback
-                >
+                  >Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>
 
               <b-form-group label="Placa" label-for="placa">
@@ -75,7 +74,6 @@
                   type="number"
                   required
                   v-model="mantenimiento.horas_invertidas"
-                  :disabled="enEdicion"
                   placeholder="Ingrese las horas invertidas"
                   id="horas_invertidas"
                 />
@@ -100,7 +98,7 @@
             v-show="showTable"
             class="border border-danger text-center">
             <template v-slot:cell(acciones)="row">
-              <b-button size="sm" @click="cargarMantenimientos(row)" class="mr-2" variant="outline-primary">
+              <b-button size="sm" @click="cargarMantenimiento(row)" class="mr-2" variant="outline-primary">
                Modificar
               </b-button>
               <br />

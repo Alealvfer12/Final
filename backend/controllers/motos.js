@@ -45,18 +45,20 @@ let eliminar_moto = (placa) => {
 };
 
 
-let consultar_motos = async () => {
-    let _service = new ServicePg();
-    let sql = `SELECT placa, estado, clase, marca, modelo, color, cilindraje, id_propietario, nro_soat, vencimiento_soat, nro_tecnomecanica, vencimiento_tecnomecanica
-      FROM public.motos`;
-    let respuesta = await _service.runsql(sql);
-    return respuesta;
-  };
+
 
 let consultar_moto = async (placa) => {
   let _service = new ServicePg();
   let sql = `SELECT placa, estado, clase, marca, modelo, color, cilindraje, id_propietario, nro_soat, vencimiento_soat, nro_tecnomecanica, vencimiento_tecnomecanica
-    FROM public.motos where placa = '${placa}?'`;
+    FROM public.motos where placa = '${placa}'`;
+  let respuesta = await _service.runsql(sql);
+  return respuesta;
+};
+
+let consultar_motos = async () => {
+  let _service = new ServicePg();
+  let sql = `SELECT placa, estado, clase, marca, modelo, color, cilindraje, id_propietario, nro_soat, vencimiento_soat, nro_tecnomecanica, vencimiento_tecnomecanica
+    FROM public.motos`;
   let respuesta = await _service.runsql(sql);
   return respuesta;
 };

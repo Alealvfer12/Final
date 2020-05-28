@@ -153,20 +153,20 @@ cargarMoto({ item }) {
 
     .then(response => {
       var array = response.data.info;
-      console.log(item)
+      console.log(array)
       this.enEdicion = true;
-      this.motos.placa = array[0].placa;
-      this.motos.estado = array[0].estado;
-      this.motos.clase = array[0].clase;
-      this.motos.marca = array[0].marca;
-      this.motos.modelo = array[0].modelo;
-      this.motos.color = array[0].color;
-      this.motos.cilindraje = array[0].cilindraje;
-      this.motos.id_propietario = array[0].id_propietario;
-      this.motos.nro_soat = array[0].nro_soat;
-      this.motos.vencimiento_soat = array[0].vencimiento_soat;
-      this.motos.nro_tecno = array[0].nro_tecno;
-      this.motos.vencimiento_tecno = array[0].vencimiento_tecno;
+      this.moto.placa = array[0].placa;
+      this.moto.estado = array[0].estado;
+      this.moto.clase = array[0].clase;
+      this.moto.marca = array[0].marca;
+      this.moto.modelo = array[0].modelo;
+      this.moto.color = array[0].color;
+      this.moto.cilindraje = array[0].cilindraje;
+      this.moto.id_propietario = array[0].id_propietario;
+      this.moto.nro_soat = array[0].nro_soat;
+      this.moto.vencimiento_soat = array[0].vencimiento_soat;
+      this.moto.nro_tecno = array[0].nro_tecnomecanica;
+      this.moto.vencimiento_tecno = array[0].vencimiento_tecnomecanica;
     })
     .catch(error => {
       console.log(error);
@@ -175,22 +175,22 @@ cargarMoto({ item }) {
 actualizarMotos() {
   if (
     this.validacion &&
-    this.motos.placa.length < 7 &&
-    this.motos.cilindraje.length < 5 &&
-    this.motos.modelo.length < 5
+    this.moto.placa.length < 7 &&
+    this.moto.cilindraje.length < 5 &&
+    this.moto.modelo.length < 5
   ) {
     axios
-      .put(`http://127.0.0.1:3001/api/v1/motos/${this.motos.placa}`, this.motos, {
+      .put(`http://127.0.0.1:3001/api/v1/motos/ ${this.moto.placa} ` , this.moto, {
         headers: { token: this.token }
       })
       .then(response => {
         console.log(response)
         let posicion = this.lista_motos.findIndex(
-          motos => motos.placa == this.motos.placa
+          motos => motos.placa == this.moto.placa
         );
-        this.lista_motos.splice(posicion, 1, this.motos);
+        this.lista_motos.splice(posicion, 1, this.moto);
         this.enEdicion = false;
-        this.motos = {
+        this.moto = {
           placa: "",
           estado: "",
           clase: "",
