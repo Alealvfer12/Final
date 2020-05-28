@@ -52,6 +52,7 @@ export default {
       );
     }
   },
+  // metodos
   methods: {
     validar_condicion(bool) {
       if (bool == false) {
@@ -121,7 +122,7 @@ export default {
               horas_invertidas: ""
             };
             this.cargarMantenimientos();
-            alert("Moto Insertada Correctamente");
+            alert("Mantenimiento Insertado Correctamente");
           })
           .catch(error => {
             console.log(error);
@@ -144,7 +145,7 @@ export default {
               lista_mantenimientos.fecha == item.fecha
           );
           this.lista_mantenimientos.splice(posicion, 1);
-          alert("Usuario Eliminado");
+          alert("Mantenimiento Eliminado");
         })
         .catch(error => {
           console.log(error);

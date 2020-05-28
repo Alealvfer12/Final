@@ -44,9 +44,6 @@ let eliminar_moto = (placa) => {
   return respuesta;
 };
 
-
-
-
 let consultar_moto = async (placa) => {
   let _service = new ServicePg();
   let sql = `SELECT placa, estado, clase, marca, modelo, color, cilindraje, id_propietario, nro_soat, vencimiento_soat, nro_tecnomecanica, vencimiento_tecnomecanica

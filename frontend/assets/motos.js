@@ -68,6 +68,8 @@ export default {
         return this.validar_condicion(this.motos.vencimiento_tecno.length > 0);
       },
   },
+  // metodos
+  
   methods: {
     validar_condicion(bool) {
       if (bool == false) {

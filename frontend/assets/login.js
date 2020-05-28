@@ -29,6 +29,9 @@ export default {
       return this.usuario.clave.length > 0;
     }
   },
+
+  //metodos
+  
   methods: {
     iniciar() {
       let url = this.url + "login";
@@ -41,6 +44,7 @@ export default {
             console.log("Data:", data);
             localStorage.setItem("token", data.info);
             localStorage.setItem("documento", this.usuario.documento);
+            localStorage.setItem("rol", data.rol);
             this.$router.push("/principal");
             alert("Intento de entrar")
           })
