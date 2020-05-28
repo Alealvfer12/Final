@@ -153,7 +153,7 @@ cargarMoto({ item }) {
 
     .then(response => {
       var array = response.data.info;
-      console.log(array)
+      console.log(item)
       this.enEdicion = true;
       this.motos.placa = array[0].placa;
       this.motos.estado = array[0].estado;

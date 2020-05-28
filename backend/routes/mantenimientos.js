@@ -1,24 +1,22 @@
 const express = require("express");
 const router = express.Router();
-
 const {
-  consultar_mantenimientos,
-  consultar_mantenimiento,
-  eliminar_mantenimiento,
-  insertar_mantenimiento,
   actualizar_mantenimiento,
+  ver_mantenimientos,
+  ver_mantenimiento,
   validar_mantenimiento,
+  eliminar_mantenimiento,
+  crear_mantenimiento,
 } = require("../controllers/mantenimientos");
 
-
 router.get("/mantenimientos", (req, res) => {
-    consultar_mantenimientos()
+  ver_mantenimientos()
     .then((answerDB) => {
       let records = answerDB.rows;
       res.send({
         ok: true,
         info: records,
-        mensaje: "Mantenimientos consultadas",
+        mensaje: "Mantenimientos consultados",
       });
     })
     .catch((error) => {
@@ -26,14 +24,14 @@ router.get("/mantenimientos", (req, res) => {
     });
 });
 
-router.get("/mantenimientos/:id", (req, res) => {
-  let info_mantenimiento = req.params.id;
-  consultar_mantenimiento(info_mantenimiento)
+router.get("/mantenimientos/:placa", (req, res) => {
+  let info_mantenimiento = req.params.placa;
+  ver_mantenimiento(info_mantenimiento)
     .then((answerDB) => {
       res.send({
         ok: true,
-        info: answerDB,
-        mensaje: "Mantenimientos consultada",
+        info: answerDB.rows,
+        mensaje: "mantenimiento consultada",
       });
     })
     .catch((error) => {
@@ -45,11 +43,11 @@ router.post("/mantenimientos", (req, res) => {
   try {
     let info_mantenimiento = req.body;
     validar_mantenimiento(info_mantenimiento);
-    insertar_mantenimiento(info_mantenimiento)
+    crear_mantenimiento(info_mantenimiento)
       .then((answerDB) => {
         res.send({
           ok: true,
-          mensaje: "Mantenimiento guardado",
+          mensaje: "Usuario guardado",
           info: info_mantenimiento,
         });
       })
@@ -61,14 +59,16 @@ router.post("/mantenimientos", (req, res) => {
   }
 });
 
-router.delete("/mantenimientos/:id", (req, res) => {
+router.delete("/mantenimientos/:placa/:id_mecanico/:fecha", (req, res) => {
   try {
-    let info_mantenimiento = req.params.id;
-    eliminar_mantenimiento(info_mantenimiento)
+    let placa = req.params.placa;
+    let id_mecanico = req.params.id_mecanico;
+    let fecha = req.params.fecha;
+    eliminar_mantenimiento(id_mecanico,placa,fecha)
       .then((answerDB) => {
         res.send({
           ok: true,
-          mensaje: "Mantenimientos eliminada",
+          mensaje: "mantenimiento eliminada",
         });
       })
       .catch((error) => {
@@ -79,26 +79,20 @@ router.delete("/mantenimientos/:id", (req, res) => {
   }
 });
 
-router.put("/mantenimientos/:placa/:id_mecanico/:fecha", (req, res) => {
+router.put("/mantenimientos/:placa", (req, res) => {
   try {
-    let p= req.params.placa;
-    let id_mec =req.params.id_mecanico;
-    let fec =req.params.fecha;
-    let info_mantenimiento = req.body;
+    //Capturar el body desde la solicitud
+    let id = req.params.placa;
+    let info_mantemiento = req.body;
 
-    let asig ={
-      placa: p,
-      id_mecanico: id_mec,
-      fecha : fec
-    }
-    // Actualiza el mantenimiento en base de datos
+    // Actualiza el usuario en base de datos
 
-    actualizar_mantenimiento(info_mantenimiento, asig)
+    actualizar_mantenimiento(info_mantenimiento, id)
       .then((answerDB) => {
         res.send({
           ok: true,
-          mensaje: "Mantenimientos editada",
-          info: info_mantenimiento,
+          mensaje: "mantenimiento editado",
+          info: info_usuario,
         });
       })
       .catch((error) => {
@@ -110,5 +104,4 @@ router.put("/mantenimientos/:placa/:id_mecanico/:fecha", (req, res) => {
     res.send(error);
   }
 });
-
 module.exports = router;
