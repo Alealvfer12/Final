@@ -146,7 +146,6 @@ export default {
         .then(response => {
             var array = response.data.info;
             this.enEdicion = true;
-
             this.usuarios.tipo_documento = array[0].tipo_documento;
             this.usuarios.documento = array[0].documento;
             this.usuarios.nombre = array[0].nombre;

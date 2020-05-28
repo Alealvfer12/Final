@@ -37,10 +37,9 @@ let insertar_moto = async (moto) => {
   let respuesta = await _service.runsql(sql, values);
   return respuesta;
 };
-
 let eliminar_moto = (placa) => {
   let _service = new ServicePg();
-  let sql = `DELETE FROM public.motos where placa = '${placa}`;
+  let sql = `DELETE FROM public.motos where placa = '${placa}'`;
   let respuesta = _service.runsql(sql);
   return respuesta;
 };
@@ -68,8 +67,6 @@ let actualizar_moto = async (moto, placa) => {
     SET  estado=$1, clase=$2, marca=$3, modelo=$4, color=$5, cilindraje=$6, id_propietario=$7, 
     nro_soat=$8, vencimiento_soat=$9, nro_tecnomecanica=$10, vencimiento_tecnomecanica=$11
     WHERE placa = $12`;
-
-
   let values = [
     moto.estado,
     moto.clase,
@@ -82,14 +79,11 @@ let actualizar_moto = async (moto, placa) => {
     moto.vencimiento_soat,
     moto.nro_tecno,
     moto.vencimiento_tecno,
-    placa
+    placa,
   ];
-
-
   let respuesta = _service.runsql(sql, values);
   return respuesta;
 };
-
 module.exports = {
   consultar_motos,
   consultar_moto,

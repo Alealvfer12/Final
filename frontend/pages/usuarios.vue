@@ -43,7 +43,7 @@
                   class="form-control"
                   v-model="usuarios.apellidos"
                   id="apellidos"
-                  required
+                  required               
                   placeholder="Ingrese apellidos del usuario "/>
                 <b-form-invalid-feedback :state="validacionApellido">Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>

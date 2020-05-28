@@ -41,7 +41,7 @@ export default {
             console.log("Data:", data);
             localStorage.setItem("token", data.info);
             localStorage.setItem("documento", this.usuario.documento);
-            //this.$router.push("/home");
+            this.$router.push("/principal");
             alert("Intento de entrar")
           })
           .catch(error => {

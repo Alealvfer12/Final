@@ -61,13 +61,14 @@ router.post("/motos", (req, res) => {
   }
 });
 
-router.delete("/motos/:id", (req, res) => {
+router.delete("/motos/:placa", (req, res) => {
   try {
-    let info_moto = req.params.id;
+    let info_moto = req.params.placa;
     eliminar_moto(info_moto)
       .then((answerDB) => {
         res.send({
           ok: true,
+          info: info_moto,
           mensaje: "Moto eliminada",
         });
       })
@@ -79,20 +80,18 @@ router.delete("/motos/:id", (req, res) => {
   }
 });
 
-router.put("/motos/:id", (req, res) => {
+router.put("/motos/:placa", (req, res) => {
   try {
     //Capturar el body desde la solicitud
-    let id = req.params.id;
+    let placa = req.params.placa;
     let info_moto = req.body;
 
-    // Actualiza el usuario en base de datos
-
-    actualizar_moto(info_moto, id)
+    actualizar_moto(info_moto, placa)
       .then((answerDB) => {
         res.send({
           ok: true,
           mensaje: "Moto editada",
-          info: info_moto,
+          info: info_usuario,
         });
       })
       .catch((error) => {
@@ -104,5 +103,4 @@ router.put("/motos/:id", (req, res) => {
     res.send(error);
   }
 });
-
 module.exports = router;

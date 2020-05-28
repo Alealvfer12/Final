@@ -49,7 +49,6 @@
                   class="form-control"
                   required
                   v-model="motos.marca"
-                  :disabled="enEdicion"
                   placeholder="Ingrese marca"
                   id="marca"/>
                 <b-form-invalid-feedback :state="validacionMarca">Campo obligatorio</b-form-invalid-feedback>
@@ -61,7 +60,6 @@
                   type="number"
                   required
                   v-model="motos.modelo"
-                  :disabled="enEdicion"
                   placeholder="Ingrese modelo"
                   id="modelo"/>
                 <b-form-invalid-feedback :state="validacionModelo">Campo obligatorio</b-form-invalid-feedback>
@@ -72,7 +70,6 @@
                   class="form-control"
                   required
                   v-model="motos.color"
-                  :disabled="enEdicion"
                   placeholder="Ingrese color"
                   id="color"/>
                 <b-form-invalid-feedback :state="validacionColor">Campo obligatorio</b-form-invalid-feedback>
@@ -83,7 +80,6 @@
                   type="number"
                   required
                   v-model="motos.cilindraje"
-                  :disabled="enEdicion"
                   placeholder="Ingrese cilindraje"
                   id="cilindraje"/>
                 <b-form-invalid-feedback :state="validacionCilindraje">Campo obligatorio</b-form-invalid-feedback>
@@ -94,7 +90,6 @@
                   type="number"
                   required
                   v-model="motos.id_propietario"
-                  :disabled="enEdicion"
                   placeholder="Ingrese id del propietario"
                   id="id_propietario"/>
                 <b-form-invalid-feedback :state="validacionId_propietario">Campo obligatorio</b-form-invalid-feedback>
@@ -105,7 +100,6 @@
                   type="number"
                   required
                   v-model="motos.nro_soat"
-                  :disabled="enEdicion"
                   placeholder="Ingrese numero del soat"
                   id="nro_soat"/>
                 <b-form-invalid-feedback :state="validacionNro_soat">Campo obligatorio</b-form-invalid-feedback>
@@ -116,7 +110,6 @@
                   class="form-control"          
                   required
                   v-model="motos.vencimiento_soat"
-                  :disabled="enEdicion"
                   placeholder="dd-mm-aaaa"
                   id="vencimiento_soat"/>
                 <b-form-invalid-feedback :state="validacionVencimiento_soat">Campo obligatorio</b-form-invalid-feedback>
@@ -128,7 +121,6 @@
                   type="number"
                   required
                   v-model="motos.nro_tecno"
-                  :disabled="enEdicion"
                   placeholder="Ingrese numero de la tecnomecánica"
                   id="nro_tecno"/>
                 <b-form-invalid-feedback :state="validacionNro_tecno">Campo obligatorio</b-form-invalid-feedback>
@@ -139,7 +131,6 @@
                   class="form-control"            
                   required
                   v-model="motos.vencimiento_tecno"
-                  :disabled="enEdicion"
                   placeholder="dd-mm-aaaa"
                   id="vencimiento_tecno"/>
                 <b-form-invalid-feedback :state="validacionVencimiento_tecno">Campo obligatorio</b-form-invalid-feedback>

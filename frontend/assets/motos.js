@@ -7,6 +7,7 @@ export default {
       enEdicion: false,
       showTable: true,
       validacion: "",
+      validacion_actualizar: "",
       motos: {
         placa: "",
         estado: "",
@@ -30,6 +31,7 @@ export default {
   },
   computed: {
     validacionPlaca() {
+      if (this.validacion_actualizar) return true;
       return this.validar_condicion(this.motos.placa.length > 0);
     },
     validacionEstado() {
@@ -95,7 +97,9 @@ export default {
   crearMotos() {
     if (this.validacion == true) {
         axios
-            .post("http://127.0.0.1:3001/api/v1/motos", this.motos)
+            .post("http://127.0.0.1:3001/api/v1/motos", this.motos, {
+              headers: { token: this.token }
+            })
             .then(response => {
                 this.lista_motos.push(response.data.info);
                 console.log(response);
@@ -126,78 +130,88 @@ export default {
 },
 eliminarMotos({ item }) {
   axios
-      .delete(`http://127.0.0.1:3001/api/v1/motos/${item.placa}`)
-      .then(response => {
-          let posicion = this.lista_motos.findIndex(
-              lista_motos => lista_motos.placa == item.placa
-          );
-          this.lista_motos.splice(posicion, 1);
-          alert("Moto Eliminada");
-      })
-      .catch(error => {
-          console.log(error);
-      });
+    .delete(`http://127.0.0.1:3001/api/v1/motos/${item.placa}`, {
+      headers: { token: this.token }
+    })
+    .then(response => {
+      let posicion = this.lista_motos.findIndex(
+        lista_motos => lista_motos.placa == item.placa
+      );
+      this.lista_motos.splice(posicion, 1);
+      alert("Moto Eliminada");
+    })
+    .catch(error => {
+      console.log(error);
+    });
 },
 cargarMoto({ item }) {
+  this.validacion_actualizar = true;
   axios
-      .get(`http://127.0.0.1:3001/api/v1/motos/${item.placa}`)
-      .then(response => {
-          var array = response.data.info;
-          this.enEdicion = true;
-          this.motos.placa = array[0].placa;
-          this.motos.estado = array[0].estado;
-          this.motos.clase = array[0].clase;
-          this.motos.marca = array[0].marca;
-          this.motos.modelo = array[0].modelo;
-          this.motos.color = array[0].color;
-          this.motos.cilindraje = array[0].cilindraje;
-          this.motos.id_propietario = array[0].id_propietario;
-          this.motos.nro_soat = array[0].nro_soat;
-          this.motos.vencimiento_soat = array[0].vencimiento_soat;
-          this.motos.nro_tecno = array[0].nro_tecno;
-          this.motos.vencimiento_tecno = array[0].vencimiento_tecno;
-          this.motos.acciones = true;
-      })
-      .catch(error => {
-          console.log(error);
-      });
+    .get(`http://127.0.0.1:3001/api/v1/motos/${item.placa}`, {
+      headers: { token: this.token }
+    })
+
+    .then(response => {
+      var array = response.data.info;
+      console.log(array)
+      this.enEdicion = true;
+      this.motos.placa = array[0].placa;
+      this.motos.estado = array[0].estado;
+      this.motos.clase = array[0].clase;
+      this.motos.marca = array[0].marca;
+      this.motos.modelo = array[0].modelo;
+      this.motos.color = array[0].color;
+      this.motos.cilindraje = array[0].cilindraje;
+      this.motos.id_propietario = array[0].id_propietario;
+      this.motos.nro_soat = array[0].nro_soat;
+      this.motos.vencimiento_soat = array[0].vencimiento_soat;
+      this.motos.nro_tecno = array[0].nro_tecno;
+      this.motos.vencimiento_tecno = array[0].vencimiento_tecno;
+    })
+    .catch(error => {
+      console.log(error);
+    });
 },
 actualizarMotos() {
-  if (this.validacion == true) {
-      axios
-          .put(
-              `http://127.0.0.1:3001/api/v1/motos/${this.motos.placa}`,
-              this.motos
-          )
-          .then(response => {
-              let posicion = this.lista_motos.findIndex(
-                  motos => motos.placa == this.motos.placa
-              );
-              this.lista_motos.splice(posicion, 1, this.motos);
-              this.enEdicion = false;
-              this.motos = {
-                  placa: "",
-                  estado: "",
-                  clase: "",
-                  marca: "",
-                  modelo: "",
-                  color: "",
-                  cilindraje: "",
-                  id_propietario: "",
-                  nro_soat: "",
-                  vencimiento_soat: "",
-                  nro_tecno: "",
-                  vencimiento_tecno: "",
-                  acciones: true
-              };
-              alert("Moto Actualizada Correctamente");
-              location.reload();
-          })
-          .catch(error => {
-              console.log(error);
-          });
+  if (
+    this.validacion &&
+    this.motos.placa.length < 7 &&
+    this.motos.cilindraje.length < 5 &&
+    this.motos.modelo.length < 5
+  ) {
+    axios
+      .put(`http://127.0.0.1:3001/api/v1/motos/${this.motos.placa}`, this.motos, {
+        headers: { token: this.token }
+      })
+      .then(response => {
+        console.log(response)
+        let posicion = this.lista_motos.findIndex(
+          motos => motos.placa == this.motos.placa
+        );
+        this.lista_motos.splice(posicion, 1, this.motos);
+        this.enEdicion = false;
+        this.motos = {
+          placa: "",
+          estado: "",
+          clase: "",
+          marca: "",
+          modelo: "",
+          color: "",
+          cilindraje: "",
+          id_propietario: "",
+          nro_soat: "",
+          vencimiento_soat: "",
+          nro_tecno: "",
+          vencimiento_tecno: ""
+        };
+        alert("Moto Actualizada Correctamente");
+        this.validacion_actualizar = false;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   } else {
-      alert("LLene todos los campos correctamente");
+    alert("LLene todos los campos correctamente");
   }
 }
   }
