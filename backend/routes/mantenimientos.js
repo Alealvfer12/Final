@@ -79,14 +79,21 @@ router.delete("/mantenimientos/:id", (req, res) => {
   }
 });
 
-router.put("/mantenimientos/:id", (req, res) => {
+router.put("/mantenimientos/:placa/:id_mecanico/:fecha", (req, res) => {
   try {
-    let id = req.params.id;
+    let p= req.params.placa;
+    let id_mec =req.params.id_mecanico;
+    let fec =req.params.fecha;
     let info_mantenimiento = req.body;
 
+    let asig ={
+      placa: p,
+      id_mecanico: id_mec,
+      fecha : fec
+    }
     // Actualiza el mantenimiento en base de datos
 
-    actualizar_mantenimiento(info_mantenimiento, id)
+    actualizar_mantenimiento(info_mantenimiento, asig)
       .then((answerDB) => {
         res.send({
           ok: true,

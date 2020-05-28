@@ -9,7 +9,7 @@
           <b-card title="Crear usuario">
             <b-card-text>A continuación inserte sus datos :</b-card-text>
 
-            <b-form action="javascript:void(0)" @submit="crearUsuario()">
+            <b-form action="javascript:void(0)" @submit="crearUsuarios()">
               <br />
 
               <b-form-group label="Tipo" label-for="tipo">
@@ -39,7 +39,7 @@
               </b-form-group>
 
               <b-form-group label="Apellidos" label-for="apellidos">
-                <b-form-textarea
+               <b-form-input
                   class="form-control"
                   v-model="usuarios.apellidos"
                   id="apellidos"
@@ -54,7 +54,6 @@
                   type="number"
                   required
                   v-model="usuarios.celular"
-                  :disabled="enEdicion"
                   placeholder="Ingrese celular"
                   id="celular"/>
                 <b-form-invalid-feedback :state="validacionCelular">Campo obligatorio</b-form-invalid-feedback>
@@ -66,7 +65,6 @@
                   type="email"
                   required
                   v-model="usuarios.correo"
-                  :disabled="enEdicion"
                   placeholder="Ingrese correo del usuario"
                   id="correo"/>
                 <b-form-invalid-feedback :state="validacionCorreo">Campo obligatorio</b-form-invalid-feedback>
@@ -84,11 +82,11 @@
                     v-model="usuarios.clave"
                     placeholder="Ingrese su contraseña"
                     id="clave"/>
-                <b-form-invalid-feedback :state="validarClave">Campo obligatorio</b-form-invalid-feedback>
+                <b-form-invalid-feedback :state="validacionClave">Campo obligatorio</b-form-invalid-feedback>
               </b-form-group>
 
               <b-button type="submit" variant="danger" v-if="!enEdicion">Crear usuario</b-button>
-              <b-button @click="actualizar_usuario()" variant="primary" v-else>Actualizar usuario</b-button>
+              <b-button @click="actualizarUsuarios()" variant="primary" v-else>Actualizar usuario</b-button>
             </b-form>
           </b-card>
         </b-col>
@@ -98,21 +96,20 @@
             striped
             responsive
             hover
-            :items="lista_usuario"
+            :items="lista_usuarios"
             v-show="showTable"
             class="border border-danger text-center">
             <template v-slot:cell(acciones)="row">
               <b-button size="sm" @click="cargarUsuario(row)" class="mr-2" variant="outline-primary">
-                <b-img left  width="15" height="15"></b-img>Modificar
+                Modificar
               </b-button>
               <br />
               <br />
               <b-button
                 size="sm"
-                @click="eliminar_usuario(row)"
+                @click="eliminarUsuarios(row)"
                 class="mr-2"
-                variant="outline-danger">
-                <b-img left width="15" height="15"></b-img>Eliminar
+                variant="outline-danger">Eliminar
               </b-button>
             </template>
           </b-table>

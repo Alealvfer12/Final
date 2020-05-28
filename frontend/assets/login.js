@@ -1,9 +1,8 @@
 import axios from "axios";
 
 export default {
-  beforeMount() {
-    //this.carga_pagina();
-  },
+  //Asigno el layout
+  layout: "login",
   data() {
     return {
       url: "http://localhost:3001/api/v1/",
